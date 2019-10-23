@@ -1,0 +1,79 @@
+# DeepSpeech 2 v2 by SeanNaren for Librispeech dataset
+alphabet: 
+  from_file: &alphabet $CODE_DIR/data/labels.en.json 
+
+transforms: &transforms
+  type: compose
+  transforms:
+    - type: to-tensor
+      sample_rate: 16000
+    - type: to-spectrogram
+
+target_transforms: &target_transforms
+  type: to-label
+  locale: en
+  alphabet: *alphabet
+
+dataset_reader: &dataset_reader
+  type: audio-dataset
+  data_dir: $DATA_DIR
+  transforms: *transforms
+  target_transforms: *target_transforms
+
+train_dataset:
+  <<: *dataset_reader
+  manifest_filepath: $CODE_DIR/data/librispeech.train.csv
+  transforms:
+    type: compose
+    transforms:
+      - type: to-tensor
+      - type: to-spectrogram
+
+val_dataset:
+  <<: *dataset_reader
+  manifest_filepath: $CODE_DIR/data/librispeech.val.csv
+
+data_loader: audio-loader
+
+model:
+  type: ds2-seannaren
+  rnn_type: lstm
+  rnn_hidden_size: 1024
+  num_rnn_layers: 5
+  bidirectional: True
+
+loss:
+  type: ctc
+
+trainer:
+  num_epochs: 60
+  batch_size: 16
+  # warmup_epochs: 1
+
+  # label_smoothing: 0.0
+
+  
+  # no_grad: [] # if regex match, will set require_grado to false
+  # no_ft: [] # list with weights name to ignore when loading a pretrained model
+
+  optimizer:
+    type: sgd
+    lr: 0.00048
+    momentum: 0.90
+    nesterov: True
+    weight_decay: 0.00001
+    scale: True # if true, lr will be scaled by the world size
+    # larc_eta: 0.001
+
+  lr_scheduler:
+    type: exponential
+    gamma: 0.9090909091
+    # type: cosine
+    # T_max: 95
+    # eta_min: 0.00001
+
+  clip_grad_norm: 400
+  clip_grad_value: null
+
+  metrics: [wer, cer]
+  monitor: wer

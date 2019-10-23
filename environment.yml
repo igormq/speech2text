@@ -1,0 +1,15 @@
+channels:
+  - pytorch
+dependencies:
+  - pytorch>=1.0.1
+  - torchvision
+  - cudatoolkit=9.0
+  - pyyaml
+  - pip:
+    - wget
+    - num2words
+    - unidecode
+    - editdistance
+    - git+https://github.com/pytorch/ignite.git
+    - git+https://github.com/pytorch/audio.git
+    - git+https://github.com/parlance/ctcdecode.git

@@ -1,0 +1,3 @@
+[submodule "third_party/ctcdecode"]
+	path = third_party/ctcdecode
+	url = https://github.com/igormq/ctcdecode
