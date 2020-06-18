@@ -1,3 +1,5 @@
+""" Module to scrap all the Wikipedia text
+"""
 import argparse
 import copy
 import datetime

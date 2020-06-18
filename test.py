@@ -1,18 +1,15 @@
+""" Module for testing a trained model against a dataset
+""" 
 import argparse
 import logging
 import os
-from itertools import product
-from timeit import default_timer
 
 import tqdm
-import pandas as pd
 import torch
-from torch.multiprocessing import Pool, cpu_count
 
 from asr import samplers, models
 from asr.utils.exp_utils import prepare_environment
 from asr.data import loaders, datasets, Alphabet
-from asr.data.speech2text.transforms import ToTensor
 from asr.decoders import GreedyCTCDecoder
 from asr.models import load_archive, CONFIG_NAME
 from asr.common import Params

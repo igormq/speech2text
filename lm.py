@@ -1,3 +1,5 @@
+""" CLI to tokekenize and generate the vocab for the language models
+"""
 import argparse
 from collections import Counter
 import re

@@ -2,7 +2,7 @@
 It requires a configuration file and a directory in which to write the results.
 
 
-Heavily inspired on AllenNLP and NVIDIA/OpenSeq2Seq :)
+Heavily inspired on SeanNaren DeepSpeech2, AllenNLP, and NVIDIA/OpenSeq2Seq
 """
 
 import argparse

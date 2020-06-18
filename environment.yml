@@ -12,4 +12,4 @@ dependencies:
     - editdistance
     - git+https://github.com/pytorch/ignite.git
     - git+https://github.com/pytorch/audio.git
-    - git+https://github.com/parlance/ctcdecode.git
+    - git+https://github.com/igormq/ctcdecode-pytorch.git@cpp-backend
